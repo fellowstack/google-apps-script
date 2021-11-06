@@ -1,0 +1,31 @@
+<script type="text/babel">
+
+const LOADING = 'LOADING';
+const SET_STORE = 'SET_STORE';
+
+
+const useStore = () => {
+  const { useReducer } = React;
+
+  const initialState = {
+    user: {},
+    isLoading: false,
+  };
+
+  function reducer(state, action) {
+    switch (action.type) {
+      case LOADING:
+        return {...state, isLoading: !state.isLoading};
+      case SET_STORE:
+        return {...state, user: action.payload};       
+      default:
+        throw new Error();
+    }
+  }
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return [state, dispatch];
+}
+
+</script>
