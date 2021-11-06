@@ -1,109 +1,47 @@
 <script type="text/babel">
-  const {useState, useEffect} = React;
- 
-  const Scorecard = ({state,dispatch}) => {
-  const [count,setCount] = useState(1);
-  const [data,setData]= useState({messages:[],meetings:[]})
 
-  console.log(state.isLoading);
-
-  const success = (d) => {
-    console.log(d)
-    dispatch({type: 'loading'})
-        dispatch({type: 'back', payload: d})
-  }
+const Scorecard = ({state}) => {
   
-  useEffect( () => {
-    google.script.run.withSuccessHandler(success).saveNewValue();
-    dispatch({type: 'loading'})
-
-  },[]);
-
-  const handleClick = () => {
-    console.log('clicked')
-    setCount(state => state + 1)
-  }
+  const {user, isLoading} = state;
   return (
+  <>
+  { isLoading 
+    ? 
+    <ScorecardSkeleton /> 
+    : 
+    (
     <div id="basic-form" className="card card card-default scrollspy">
-    <div className="card-content">
-      { state.isLoading ? 
-          <h4 className="card-title">Mando</h4>
-        : 
-        <> 
-          <div className="progress" style={{ height: '30px',width: '180px', opacity: '0.1',}} >
-            <div className="indeterminate"></div>
-          </div>
-        </>  
-      }
-      
-      <div className="row">
-        { state.isLoading ? 
+      <div className="card-content">
+        <h4 className="card-title">{user.first_name}</h4>
+        <div className="row">
           <div className="col s12 center-align m-3 ">
             <img 
-              src="https://styles.redditmedia.com/t5_u8wq5/styles/communityIcon_62iioh7khuv51.png?width=256&s=3c4a604c15ed964e5c5d055dc8f8c3b7e89023d9"
+              src={user.img}
               width="150"
               className="responsive-img circle z-depth-5"
             />
           </div>
-        : 
-          <div className="col s12 center-align m-3 ">
-            <div className="progress" style={{ borderRadius:'50%',height: '150px',width: '150px', opacity: '0.1',display:'inline-block'}} >
-                <div className="indeterminate"></div>
-            </div>
-          </div> 
-        }
-      </div>
-      <div className="row mt-5">
-          <div className="col s6">
-            { state.isLoading ? 
-              <>
-                <h6>Messages</h6>
-                <h5 className="m-0"><a href="#">{data.messages.length}</a></h5>
-              </> 
-            : 
-              <>
-                <div className="progress" style={{ height: '35px',width: '60px', opacity: '0.1',}} >
-                    <div className="indeterminate"></div>
-                </div>
-              </>
-            } 
-          </div>
-          
-          <div className="col s6">
-            { state.isLoading ?  
-              <>  
-                <h6>Meetings</h6>
-                <h5 className="m-0"><a href="#">{data.meetings.length}</a></h5>         
-              </>
-              :
-              <> 
-                <div className="progress" style={{ height: '35px',width: '60px', opacity: '0.1',}} >
-                  <div className="indeterminate"></div>
-                </div>
-              </>  
-            }         
         </div>
-
-      </div>
-      <div className="row">
-            <div className="col s12">
-                
-                { state.isLoading ?
-                  <>
-                    <p className="m-0">Performance</p>
-                    <p className="m-0"><a  href="#">{data.messages.length}</a> and <a href="#">{data.meetings.length}</a> reviews</p>
-                  </>
-                :
-                  <> 
-                    <div className="progress" style={{ height: '40px',width: '250px', opacity: '0.1',}} >
-                      <div className="indeterminate"></div>
-                    </div>
-                  </> 
-                }
-            </div>
-      </div>
+        <div className="row mt-5">
+          <div className="col s6">
+            <h6>Messages</h6>
+            <h5 className="m-0 cyan-text">{user.messages?.length}</h5>
+          </div>
+          <div className="col s6"> 
+            <h6>Agenda</h6>
+            <h5 className="m-0 cyan-text">{user.agenda?.length}</h5>         
+        </div>
+        </div>
+        <div className="row">
+          <div className="col s12">
+            <p className="m-0">Performance</p>
+            <p className="m-0"><span className="cyan-text">{user.messages?.length}</span> and <span className="cyan-text">{user.agenda?.length}</span> reviews</p>
+          </div>
+        </div>
       </div>
     </div>
-  )
-  }
+  )}
+  </>)
+}
+
 </script>
