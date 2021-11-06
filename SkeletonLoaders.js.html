@@ -1,0 +1,40 @@
+<script type="text/babel">
+
+const ScorecardSkeleton = () => {
+  return (
+    <div id="basic-form" className="card card card-default scrollspy">
+      <div className="card-content">
+        <div className="progress" style={{ height: '30px',width: '180px', opacity: '0.1',}} >
+          <div className="indeterminate"></div>
+        </div>
+        <div className="row">
+          <div className="col s12 center-align m-3 ">
+            <div className="progress" style={{ borderRadius:'50%',height: '150px',width: '150px', opacity: '0.1',display:'inline-block'}} >
+                <div className="indeterminate"></div>
+            </div>
+          </div> 
+        </div>
+        <div className="row mt-5">
+          <div className="col s6">
+            <div className="progress" style={{ height: '35px',width: '80%', opacity: '0.1',}} >
+                <div className="indeterminate"></div>
+            </div>
+          </div>
+          <div className="col s6">
+            <div className="progress" style={{ height: '35px',width: '80%', opacity: '0.1',}} >
+              <div className="indeterminate"></div>
+            </div>   
+        </div>
+        </div>
+        <div className="row">
+          <div className="col s12">
+            <div className="progress" style={{ height: '40px',maxWidth: '90%', opacity: '0.1',}} >
+              <div className="indeterminate"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+</script>
