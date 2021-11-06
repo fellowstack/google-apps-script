@@ -1,32 +1,34 @@
 <script type="text/babel">
-  const { useEffect } = React;
+const { useEffect } = React;
 
-  const Sidenav = () => {
+const Sidenav = ({state}) => {
+  const {user} = state;
 
-    useEffect( () => {
-        let elems = document.querySelectorAll('.sidenav');
-        let instances = M.Sidenav.init(elems);
-    } ,[]);
-    return (
-      <>
-        <ul id="slide-out" className="sidenav">
-          <li>
-            <div className="user-view">
-              <div className="background">
-                <img src="https://sm.ign.com/ign_es/screenshot/default/mandalorian-baby-yoda-macarons_1nqk.jpg" width="400"/>
-              </div>
-              <a href="#user"><img className="circle" src="https://styles.redditmedia.com/t5_u8wq5/styles/communityIcon_62iioh7khuv51.png?width=256&s=3c4a604c15ed964e5c5d055dc8f8c3b7e89023d9"/></a>
-              <a href="#name"><span className="white-text name">John Doe</span></a>
-              <a href="#email"><span className="white-text email">jdandturk@gmail.com</span></a>
+  useEffect( () => {
+      let elems = document.querySelectorAll('.sidenav');
+      let instances = M.Sidenav.init(elems);
+  } ,[]);
+  
+  return (
+    <>
+      <ul id="slide-out" className="sidenav">
+        <li>
+          <div className="user-view">
+            <div className="background">
+              <img src="https://sm.ign.com/ign_es/screenshot/default/mandalorian-baby-yoda-macarons_1nqk.jpg" width="400"/>
             </div>
-          </li>
-          <li><a href="#!"><i className="material-icons">home</i>Home</a></li>
-          <li><div className="divider"></div></li>
-          <li><a href="#!"><i className="material-icons">person_outline</i>Profile</a></li>
-          <li><div className="divider"></div></li>
-        </ul>
-      </>
-    )
-  }
+            <a href="#user"><img className="circle" src={user.img}/></a>
+            <a href="#name"><span className="white-text name">John Doe</span></a>
+            <a href="#email"><span className="white-text email">jdandturk@gmail.com</span></a>
+          </div>
+        </li>
+        <li><a href="#!"><i className="material-icons">home</i>Home</a></li>
+        <li><div className="divider"></div></li>
+        <li><a href="#!"><i className="material-icons">person_outline</i>Profile</a></li>
+        <li><div className="divider"></div></li>
+      </ul>
+    </>
+  )
+}
 
 </script>
