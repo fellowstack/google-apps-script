@@ -1,12 +1,35 @@
 <script type="text/babel">
 
-  const App = () => {
-    return (
-      <>
-        <Navbar/>
-        <Sidenav />
-      </>  
-    )
+const App = () => {
+  const [state, dispatch] = useStore();
+
+  console.log(state)
+
+  const setData = (data) => {
+    data.messages = JSON.parse( data.messages );
+    data.agenda = JSON.parse( data.agenda );
+    dispatch({type: SET_STORE, payload: data});
+    dispatch({type: LOADING})
   }
+  useEffect( () => {
+
+    google.script.run.withSuccessHandler(setData).getUserInfo();
+    dispatch({type: LOADING})
+  },[]);
+
+  return (
+    <>
+      <Navbar/>
+      <Sidenav state={state} />
+      <div className="container">
+        <div className="row">
+          <div className="col s12 m4">
+            <Scorecard state={state}/>
+          </div>
+        </div>
+      </div>
+    </>  
+  )
+}
 
 </script>
